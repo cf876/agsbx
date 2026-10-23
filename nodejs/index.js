@@ -32,15 +32,21 @@ function normalizeEnvironment() {
     /*
      * 兼容 argosbx.sh 中使用的固定 Argo 变量名：
      *
-     * ARGO_DOMAIN -> agn
-     * ARGO_AUTH   -> agk
+     * ARGO_DOMAIN / argo_domain  -> agn
+     * ARGO_AUTH / argo_auth      -> agk
      */
-    if (!process.env.agn && process.env.ARGO_DOMAIN) {
-        process.env.agn = process.env.ARGO_DOMAIN;
+    if (!process.env.agn) {
+        process.env.agn =
+            process.env.ARGO_DOMAIN ||
+            process.env.argo_domain ||
+            '';
     }
 
-    if (!process.env.agk && process.env.ARGO_AUTH) {
-        process.env.agk = process.env.ARGO_AUTH;
+    if (!process.env.agk) {
+        process.env.agk =
+            process.env.ARGO_AUTH ||
+            process.env.argo_auth ||
+            '';
     }
 }
 
