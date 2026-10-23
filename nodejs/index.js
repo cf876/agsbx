@@ -254,20 +254,61 @@ function buildShellEnvironment() {
 /**
  * 运行 Shell 启动脚本，并等待其结束。
  */
-function runStartScript(scriptPath) {
-    return new Promise((resolve, reject) => {
-        console.log(`启动脚本：${scriptPath}`);
-        console.log('开始执行 Shell 初始化脚本...');
+async function runStartScript(scriptPath) {
+    let scriptContent;
 
+    try {
         /*
-         * 使用 bash 解释脚本，不要求脚本具有 x（可执行）权限。
-         * 因此不要在这里强制 chmod，否则在只读挂载目录、
-         * 非文件所有者场景下会导致初始化提前失败。
+         * 读取原始脚本，但不修改它。
          */
-        const child = spawn('bash', [scriptPath], {
+        scriptContent = await fs.promises.readFile(scriptPath, 'utf8');
+    } catch (error) {
+        throw new Error(
+            `无法读取启动脚本：${scriptPath}；原因：${error.message}`
+        );
+    }
+
+    /*
+     * 去掉 UTF-8 BOM。
+     *
+     * 如果脚本来自某些 Windows 编辑器或网页复制，
+     * 文件开头可能含有 \uFEFF，Bash 会将其误当作命令的一部分。
+     */
+    scriptContent = scriptContent.replace(/^\uFEFF/, '');
+
+    /*
+     * 将 Windows CRLF（\r\n）及旧式 CR（\r）
+     * 统一转换为 Linux / Unix LF（\n）。
+     *
+     * 不修改 /app/argosbx.sh 本身，仅清洗内存中的副本。
+     */
+    scriptContent = scriptContent.replace(/\r\n?/g, '\n');
+
+    /*
+     * 确保最后一行存在换行符。
+     */
+    if (!scriptContent.endsWith('\n')) {
+        scriptContent += '\n';
+    }
+
+    console.log(`启动脚本：${scriptPath}`);
+    console.log('已在内存中规范化 Shell 脚本换行符，开始执行...');
+
+    return new Promise((resolve, reject) => {
+        /*
+         * 不传入脚本路径：
+         *
+         * bash 将从 stdin 读取已经规范化的脚本内容。
+         * 因此：
+         * - 不需要 chmod；
+         * - 不需要创建临时 .sh 文件；
+         * - 不会修改 argosbx.sh；
+         * - 不受原脚本 CRLF 换行符影响。
+         */
+        const child = spawn('bash', [], {
             cwd: path.dirname(scriptPath),
             env: buildShellEnvironment(),
-            stdio: ['ignore', 'pipe', 'pipe']
+            stdio: ['pipe', 'pipe', 'pipe']
         });
 
         child.stdout.on('data', (data) => {
@@ -279,7 +320,17 @@ function runStartScript(scriptPath) {
         });
 
         child.on('error', (error) => {
-            reject(new Error(`无法启动 Bash 或执行脚本：${error.message}`));
+            reject(new Error(`无法启动 Bash：${error.message}`));
+        });
+
+        child.stdin.on('error', (error) => {
+            /*
+             * Bash 提前退出时，stdin 可能触发 EPIPE。
+             * 真正的失败信息由 close 事件中的退出码处理。
+             */
+            if (error.code !== 'EPIPE') {
+                console.error(`写入 Bash 标准输入失败：${error.message}`);
+            }
         });
 
         child.on('close', (code, signal) => {
@@ -296,6 +347,11 @@ function runStartScript(scriptPath) {
                 )
             );
         });
+
+        /*
+         * 把已规范化的脚本交给 Bash。
+         */
+        child.stdin.end(scriptContent);
     });
 }
 
