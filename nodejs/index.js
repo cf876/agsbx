@@ -255,19 +255,17 @@ function buildShellEnvironment() {
  * 运行 Shell 启动脚本，并等待其结束。
  */
 function runStartScript(scriptPath) {
-    return new Promise(async (resolve, reject) => {
-        try {
-            await fs.promises.chmod(scriptPath, 0o755);
-        } catch (error) {
-            reject(new Error(`启动脚本权限设置失败：${error.message}`));
-            return;
-        }
-
+    return new Promise((resolve, reject) => {
         console.log(`启动脚本：${scriptPath}`);
         console.log('开始执行 Shell 初始化脚本...');
 
+        /*
+         * 使用 bash 解释脚本，不要求脚本具有 x（可执行）权限。
+         * 因此不要在这里强制 chmod，否则在只读挂载目录、
+         * 非文件所有者场景下会导致初始化提前失败。
+         */
         const child = spawn('bash', [scriptPath], {
-            cwd: __dirname,
+            cwd: path.dirname(scriptPath),
             env: buildShellEnvironment(),
             stdio: ['ignore', 'pipe', 'pipe']
         });
@@ -281,7 +279,7 @@ function runStartScript(scriptPath) {
         });
 
         child.on('error', (error) => {
-            reject(new Error(`无法启动 Shell 脚本：${error.message}`));
+            reject(new Error(`无法启动 Bash 或执行脚本：${error.message}`));
         });
 
         child.on('close', (code, signal) => {
@@ -446,7 +444,7 @@ function sendFileContent(res, filePath, contentType, fallbackPath = null) {
  * HTTP 服务。
  */
 const server = http.createServer((req, res) => {
-    if (req.method !== 'GET') {
+    if (req.method !== 'GET' && req.method !== 'HEAD') {
         res.writeHead(405, {
             'Content-Type': 'text/plain; charset=utf-8',
             'Allow': 'GET, HEAD'
