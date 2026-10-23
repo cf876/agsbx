@@ -251,6 +251,35 @@ function buildShellEnvironment() {
     return shellEnv;
 }
 
+async function prepareAlpineLocalDirectory() {
+    /*
+     * Argosbx 在 Alpine 环境中会向 /etc/local.d 写入
+     * alpineargosbx.start / alpinesubsbx.start 等启动脚本。
+     *
+     * 某些精简 Alpine 镜像没有预创建该目录，
+     * 导致 Argosbx 虽可正常运行，但开机恢复脚本写入失败。
+     */
+    const alpineLocalDirectory = '/etc/local.d';
+
+    try {
+        await fs.promises.mkdir(alpineLocalDirectory, {
+            recursive: true,
+            mode: 0o755
+        });
+
+        console.log(`已确认 Alpine 启动脚本目录存在：${alpineLocalDirectory}`);
+    } catch (error) {
+        /*
+         * 不能创建时不阻止 Argosbx 主流程：
+         * 例如容器文件系统为只读，或运行账号权限不足。
+         */
+        console.warn(
+            `无法创建 ${alpineLocalDirectory}，` +
+            `开机自动恢复功能可能不可用：${error.message}`
+        );
+    }
+}
+
 /**
  * 运行 Shell 启动脚本，并等待其结束。
  */
@@ -290,6 +319,11 @@ async function runStartScript(scriptPath) {
     if (!scriptContent.endsWith('\n')) {
         scriptContent += '\n';
     }
+
+    /*
+     * 在 Argosbx 执行前补齐 Alpine 精简镜像中可能缺失的目录。
+     */
+    await prepareAlpineLocalDirectory();
 
     console.log(`启动脚本：${scriptPath}`);
     console.log('已在内存中规范化 Shell 脚本换行符，开始执行...');
