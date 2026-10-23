@@ -506,6 +506,8 @@ function sendFileContent(res, filePath, contentType, fallbackPath = null) {
  * HTTP 服务。
  */
 const server = http.createServer((req, res) => {
+    const isHeadRequest = req.method === 'HEAD';
+
     if (req.method !== 'GET' && req.method !== 'HEAD') {
         res.writeHead(405, {
             'Content-Type': 'text/plain; charset=utf-8',
@@ -532,6 +534,22 @@ const server = http.createServer((req, res) => {
     const subscriptionPath = SUB_ENABLED ? `/${SUB_PATH}` : '';
     const clashPath = SUB_ENABLED ? `${subscriptionPath}/clash` : '';
     const singboxPath = SUB_ENABLED ? `${subscriptionPath}/singbox` : '';
+
+    /*
+     * 兼容常见容器平台、反向代理与负载均衡器的 HEAD / 探测。
+     *
+     * HEAD 响应不需要正文，只要返回 200 即可。
+     */
+    if (isHeadRequest && urlPath === '/') {
+        res.writeHead(200, {
+            'Content-Type': 'text/plain; charset=utf-8',
+            'Cache-Control': 'no-store',
+            'X-Content-Type-Options': 'nosniff'
+        });
+
+        res.end();
+        return;
+    }
 
     /**
      * 首页。
