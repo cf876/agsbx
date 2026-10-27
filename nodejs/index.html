@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>运动改变生活 - 科学运动指南 | Exercise Changes Life - Scientific Exercise Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #FF6B35;
+            --secondary-color: #004E89;
+            --accent-color: #1A936F;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --gradient-hero: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFD700 100%);
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+            --bg-light: #F8F9FA;
+            --white: #FFFFFF;
+            --shadow: 0 10px 40px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .lang-switch {
+            background: var(--gradient-hero);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .lang-switch:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            animation: wave 20s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary-color);
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            background: var(--bg-light);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-hero);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-hero);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .benefit-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Science Section */
+        .science {
+            background: white;
+        }
+
+        .science-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .science-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .science-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .science-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .science-list li {
+            padding: 1rem 0;
+            padding-left: 2.5rem;
+            position: relative;
+            border-bottom: 1px solid #eee;
+        }
+
+        .science-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .science-visual {
+            position: relative;
+        }
+
+        .science-card {
+            background: var(--gradient-hero);
+            padding: 3rem;
+            border-radius: 20px;
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .science-card h4 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .science-card .highlight {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        /* Exercise Types Section */
+        .exercise-types {
+            background: var(--bg-light);
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .type-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .type-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .type-image {
+            height: 200px;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .type-content {
+            padding: 2rem;
+        }
+
+        .type-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .type-content p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .type-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .type-tag {
+            background: var(--bg-light);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+        }
+
+        /* Tips Section */
+        .tips {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .tips .section-header h2 {
+            background: none;
+            -webkit-text-fill-color: white;
+            color: white;
+        }
+
+        .tips .section-header p {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .tip-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+
+        .tip-number {
+            width: 50px;
+            height: 50px;
+            background: white;
+            color: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .tip-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .tip-card p {
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        /* Myths Section */
+        .myths {
+            background: white;
+        }
+
+        .myths-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .myth-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #e74c3c;
+            transition: all 0.3s ease;
+        }
+
+        .myth-card:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow);
+        }
+
+        .myth-label {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .myth-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+        }
+
+        .myth-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .truth-label {
+            background: var(--accent-color);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-hero);
+            text-align: center;
+            color: white;
+            padding: 6rem 2rem;
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button-white {
+            display: inline-block;
+            background: white;
+            color: var(--primary-color);
+            padding: 1.2rem 3.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta-button-white:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            line-height: 2;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero-stats {
+                gap: 2rem;
+            }
+
+            .science-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .myths-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .benefit-card,
+            .type-card,
+            .tip-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Scroll Animation */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <span data-zh="运动改变生活" data-en="Exercise Changes Life">运动改变生活</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#benefits" data-zh="运动益处" data-en="Benefits">运动益处</a></li>
+                <li><a href="#science" data-zh="科学原理" data-en="Science">科学原理</a></li>
+                <li><a href="#types" data-zh="运动类型" data-en="Types">运动类型</a></li>
+                <li><a href="#tips" data-zh="科学建议" data-en="Tips">科学建议</a></li>
+                <li><a href="#myths" data-zh="常见误区" data-en="Myths">常见误区</a></li>
+                <li><button class="lang-switch" id="langSwitch">中文</button></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 data-zh="运动改变生活，科学引领健康" data-en="Exercise Changes Life, Science Leads to Health">运动改变生活，科学引领健康</h1>
+            <p class="subtitle" data-zh="用科学的方式运动，让每一天都充满活力与能量" data-en="Exercise scientifically, fill every day with energy and vitality">用科学的方式运动，让每一天都充满活力与能量</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">150</span>
+                    <span class="stat-label" data-zh="分钟/周推荐运动量" data-en="Minutes/Week Recommended">分钟/周推荐运动量</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">30%</span>
+                    <span class="stat-label" data-zh="降低慢性病风险" data-en="Reduce Chronic Disease Risk">降低慢性病风险</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">7+</span>
+                    <span class="stat-label" data-zh="年延长预期寿命" data-en="Years Life Extended">年延长预期寿命</span>
+                </div>
+            </div>
+            <a href="#benefits" class="cta-button" data-zh="开始探索" data-en="Start Exploring">开始探索</a>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-zh="运动的惊人益处" data-en="Amazing Benefits of Exercise">运动的惊人益处</h2>
+                <p data-zh="科学研究证实，规律运动能为身心带来全方位的积极改变" data-en="Scientific research confirms that regular exercise brings comprehensive positive changes to body and mind">科学研究证实，规律运动能为身心带来全方位的积极改变</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3 data-zh="增强心血管健康" data-en="Enhance Cardiovascular Health">增强心血管健康</h3>
+                    <p data-zh="规律有氧运动能强化心肌，降低血压，改善血液循环，显著降低心脏病和中风的风险。每周150分钟中等强度运动即可带来明显收益。" data-en="Regular aerobic exercise strengthens the heart muscle, lowers blood pressure, improves blood circulation, and significantly reduces the risk of heart disease and stroke. 150 minutes of moderate-intensity exercise per week can bring significant benefits.">规律有氧运动能强化心肌，降低血压，改善血液循环，显著降低心脏病和中风的风险。每周150分钟中等强度运动即可带来明显收益。</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 data-zh="提升大脑功能" data-en="Boost Brain Function">提升大脑功能</h3>
+                    <p data-zh="运动促进脑源性神经营养因子(BDNF)分泌，增强记忆力和学习能力，降低阿尔茨海默病风险。运动后大脑思维更清晰，创造力也会提升。" data-en="Exercise promotes the secretion of brain-derived neurotrophic factor (BDNF), enhances memory and learning ability, and reduces the risk of Alzheimer's disease. After exercise, the brain thinks more clearly and creativity also improves.">运动促进脑源性神经营养因子(BDNF)分泌，增强记忆力和学习能力，降低阿尔茨海默病风险。运动后大脑思维更清晰，创造力也会提升。</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <h3 data-zh="改善心理健康" data-en="Improve Mental Health">改善心理健康</h3>
+                    <p data-zh="运动释放内啡肽和多巴胺，天然抗抑郁和抗焦虑。规律运动能有效缓解压力、改善睡眠质量、提升自信心和整体幸福感。" data-en="Exercise releases endorphins and dopamine, natural antidepressants and anti-anxiety agents. Regular exercise effectively relieves stress, improves sleep quality, boosts self-confidence and overall well-being.">运动释放内啡肽和多巴胺，天然抗抑郁和抗焦虑。规律运动能有效缓解压力、改善睡眠质量、提升自信心和整体幸福感。</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-bone"></i>
+                    </div>
+                    <h3 data-zh="强健骨骼肌肉" data-en="Strengthen Bones & Muscles">强健骨骼肌肉</h3>
+                    <p data-zh="力量训练增加骨密度，预防骨质疏松。肌肉量随年龄增长而流失，规律抗阻训练能维持肌肉力量，保护关节，减少跌倒和骨折风险。" data-en="Strength training increases bone density and prevents osteoporosis. Muscle mass declines with age, and regular resistance training maintains muscle strength, protects joints, and reduces the risk of falls and fractures.">力量训练增加骨密度，预防骨质疏松。肌肉量随年龄增长而流失，规律抗阻训练能维持肌肉力量，保护关节，减少跌倒和骨折风险。</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-weight"></i>
+                    </div>
+                    <h3 data-zh="控制体重代谢" data-en="Control Weight & Metabolism">控制体重代谢</h3>
+                    <p data-zh="运动提高基础代谢率，帮助燃烧多余脂肪。结合有氧和力量训练是最有效的体重管理策略，同时改善胰岛素敏感性，预防2型糖尿病。" data-en="Exercise increases basal metabolic rate and helps burn excess fat. Combining aerobic and strength training is the most effective weight management strategy, while also improving insulin sensitivity and preventing type 2 diabetes.">运动提高基础代谢率，帮助燃烧多余脂肪。结合有氧和力量训练是最有效的体重管理策略，同时改善胰岛素敏感性，预防2型糖尿病。</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 data-zh="增强免疫系统" data-en="Boost Immune System">增强免疫系统</h3>
+                    <p data-zh="适度运动促进免疫细胞循环，提高身体抵御病毒和细菌的能力。研究表明，规律运动者感冒频率更低，恢复速度也更快。" data-en="Moderate exercise promotes immune cell circulation and improves the body's ability to resist viruses and bacteria. Studies show that regular exercisers catch colds less frequently and recover faster.">适度运动促进免疫细胞循环，提高身体抵御病毒和细菌的能力。研究表明，规律运动者感冒频率更低，恢复速度也更快。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Science Section -->
+    <section class="science" id="science">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-zh="科学运动的原理" data-en="The Science Behind Exercise">科学运动的原理</h2>
+                <p data-zh="了解身体如何响应运动，让每一次锻炼都更高效" data-en="Understand how your body responds to exercise, making every workout more efficient">了解身体如何响应运动，让每一次锻炼都更高效</p>
+            </div>
+            <div class="science-content">
+                <div class="science-text">
+                    <h3 data-zh="运动如何改变你的身体" data-en="How Exercise Changes Your Body">运动如何改变你的身体</h3>
+                    <p data-zh="当你开始运动时，身体会启动一系列精妙的生理反应。心率上升，血液更多地流向肌肉；呼吸加深加快，为细胞提供更多氧气；体内激素水平变化，促进脂肪分解和肌肉合成。" data-en="When you start exercising, your body initiates a series of sophisticated physiological responses. Heart rate increases, more blood flows to muscles; breathing deepens and quickens, providing more oxygen to cells; hormone levels change, promoting fat breakdown and muscle synthesis.">当你开始运动时，身体会启动一系列精妙的生理反应。心率上升，血液更多地流向肌肉；呼吸加深加快，为细胞提供更多氧气；体内激素水平变化，促进脂肪分解和肌肉合成。</p>
+                    <p data-zh="长期坚持科学运动，身体会发生更深远的适应性改变——心肺功能增强、肌肉纤维增粗、骨密度提高、代谢效率优化。这些改变不仅让你看起来更好，更重要的是让你活得更健康、更长久。" data-en="With long-term adherence to scientific exercise, the body undergoes deeper adaptive changes—enhanced cardiopulmonary function, thicker muscle fibers, increased bone density, and optimized metabolic efficiency. These changes not only make you look better, but more importantly, help you live healthier and longer.">长期坚持科学运动，身体会发生更深远的适应性改变——心肺功能增强、肌肉纤维增粗、骨密度提高、代谢效率优化。这些改变不仅让你看起来更好，更重要的是让你活得更健康、更长久。</p>
+                    <ul class="science-list">
+                        <li data-zh="运动后24-48小时内，肌肉持续修复和生长" data-en="Muscles continue to repair and grow for 24-48 hours after exercise">运动后24-48小时内，肌肉持续修复和生长</li>
+                        <li data-zh="每次有氧运动后，代谢率提升可持续达14小时" data-en="After each aerobic exercise, elevated metabolism can last up to 14 hours">每次有氧运动后，代谢率提升可持续达14小时</li>
+                        <li data-zh="规律运动能使静息心率降低5-10次/分钟" data-en="Regular exercise can lower resting heart rate by 5-10 beats per minute">规律运动能使静息心率降低5-10次/分钟</li>
+                        <li data-zh="力量训练可使基础代谢率提高5-10%" data-en="Strength training can increase basal metabolic rate by 5-10%">力量训练可使基础代谢率提高5-10%</li>
+                    </ul>
+                </div>
+                <div class="science-visual">
+                    <div class="science-card">
+                        <h4 data-zh="FITT运动处方原则" data-en="FITT Exercise Prescription Principle">FITT运动处方原则</h4>
+                        <p data-zh="科学运动的核心框架" data-en="The core framework of scientific exercise">科学运动的核心框架</p>
+                        <div class="highlight">F·I·T·T</div>
+                        <div style="margin-top: 1.5rem;">
+                            <p><strong>F</strong> - <span data-zh="频率 Frequency：每周3-5次" data-en="Frequency: 3-5 times per week">频率 Frequency：每周3-5次</span></p>
+                            <p><strong>I</strong> - <span data-zh="强度 Intensity：中等至高强度" data-en="Intensity: Moderate to high intensity">强度 Intensity：中等至高强度</span></p>
+                            <p><strong>T</strong> - <span data-zh="时间 Time：每次30-60分钟" data-en="Time: 30-60 minutes per session">时间 Time：每次30-60分钟</span></p>
+                            <p><strong>T</strong> - <span data-zh="类型 Type：有氧+力量+柔韧" data-en="Type: Aerobic + Strength + Flexibility">类型 Type：有氧+力量+柔韧</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exercise Types Section -->
+    <section class="exercise-types" id="types">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-zh="四大运动类型" data-en="Four Major Exercise Types">四大运动类型</h2>
+                <p data-zh="全面的健康需要多元化的运动组合，每种类型都有其独特价值" data-en="Comprehensive health requires a diverse combination of exercises, each with its unique value">全面的健康需要多元化的运动组合，每种类型都有其独特价值</p>
+            </div>
+            <div class="types-grid">
+                <div class="type-card animate-on-scroll">
+                    <div class="type-image">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <div class="type-content">
+                        <h3 data-zh="有氧运动" data-en="Aerobic Exercise">有氧运动</h3>
+                        <p data-zh="提升心肺功能，燃烧卡路里，是最基础也是最重要的运动类型。建议每周至少进行150分钟中等强度有氧运动。" data-en="Improves cardiopulmonary function, burns calories, and is the most fundamental and important type of exercise. At least 150 minutes of moderate-intensity aerobic exercise per week is recommended.">提升心肺功能，燃烧卡路里，是最基础也是最重要的运动类型。建议每周至少进行150分钟中等强度有氧运动。</p>
+                        <div class="type-examples">
+                            <span class="type-tag" data-zh="跑步" data-en="Running">跑步</span>
+                            <span class="type-tag" data-zh="游泳" data-en="Swimming">游泳</span>
+                            <span class="type-tag" data-zh="骑行" data-en="Cycling">骑行</span>
+                            <span class="type-tag" data-zh="跳绳" data-en="Jump Rope">跳绳</span>
+                            <span class="type-tag" data-zh="快走" data-en="Brisk Walking">快走</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="type-card animate-on-scroll">
+                    <div class="type-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <div class="type-content">
+                        <h3 data-zh="力量训练" data-en="Strength Training">力量训练</h3>
+                        <p data-zh="增加肌肉量和骨密度，提高基础代谢率。建议每周进行2-3次力量训练，覆盖全身主要肌群。" data-en="Increases muscle mass and bone density, improves basal metabolic rate. It is recommended to do strength training 2-3 times per week, covering all major muscle groups.">增加肌肉量和骨密度，提高基础代谢率。建议每周进行2-3次力量训练，覆盖全身主要肌群。</p>
+                        <div class="type-examples">
+                            <span class="type-tag" data-zh="举重" data-en="Weightlifting">举重</span>
+                            <span class="type-tag" data-zh="俯卧撑" data-en="Push-ups">俯卧撑</span>
+                            <span class="type-tag" data-zh="深蹲" data-en="Squats">深蹲</span>
+                            <span class="type-tag" data-zh="器械训练" data-en="Machine Training">器械训练</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="type-card animate-on-scroll">
+                    <div class="type-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <div class="type-content">
+                        <h3 data-zh="柔韧性训练" data-en="Flexibility Training">柔韧性训练</h3>
+                        <p data-zh="增加关节活动范围，减少运动损伤风险，缓解肌肉紧张。建议每次运动后进行5-10分钟拉伸。" data-en="Increases joint range of motion, reduces the risk of sports injuries, and relieves muscle tension. It is recommended to stretch for 5-10分钟拉伸 after exercise.">增加关节活动范围，减少运动损伤风险，缓解肌肉紧张。建议每次运动后进行5-10分钟拉伸。</p>
+                        <div class="type-examples">
+                            <span class="type-tag" data-zh="瑜伽" data-en="Yoga">瑜伽</span>
+                            <span class="type-tag" data-zh="普拉提" data-en="Pilates">普拉提</span>
+                            <span class="type-tag" data-zh="静态拉伸" data-en="Static Stretching">静态拉伸</span>
+                            <span class="type-tag" data-zh="动态拉伸" data-en="Dynamic Stretching">动态拉伸</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="type-card animate-on-scroll">
+                    <div class="type-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="type-content">
+                        <h3 data-zh="高强度间歇训练" data-en="HIIT">高强度间歇训练</h3>
+                        <p data-zh="短时间内交替进行高强度运动和休息，燃脂效率高，还能产生"后燃效应"。适合时间紧张但想高效锻炼的人群。" data-en="Alternating high-intensity exercise and rest in a short time, with high fat-burning efficiency and the 'afterburn effect'. Suitable for those with limited time but wanting efficient workouts.">短时间内交替进行高强度运动和休息，燃脂效率高，还能产生"后燃效应"。适合时间紧张但想高效锻炼的人群。</p>
+                        <div class="type-examples">
+                            <span class="type-tag" data-zh="波比跳" data-en="Burpees">波比跳</span>
+                            <span class="type-tag" data-zh="冲刺跑" data-en="Sprint">冲刺跑</span>
+                            <span class="type-tag" data-zh="战绳" data-en="Battle Ropes">战绳</span>
+                            <span class="type-tag" data-zh="Tabata" data-en="Tabata">Tabata</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips Section -->
+    <section class="tips" id="tips">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-zh="科学运动建议" data-en="Scientific Exercise Tips">科学运动建议</h2>
+                <p data-zh="遵循这些建议，让运动更安全、更高效、更可持续" data-en="Follow these tips to make exercise safer, more efficient, and more sustainable">遵循这些建议，让运动更安全、更高效、更可持续</p>
+            </div>
+            <div class="tips-grid">
+                <div class="tip-card animate-on-scroll">
+                    <div class="tip-number">01</div>
+                    <h3 data-zh="循序渐进" data-en="Progressive Overload">循序渐进</h3>
+                    <p data-zh="从低强度开始，逐步增加运动量和强度。每周增加不超过10%，给身体足够的适应时间，避免过度训练和受伤。" data-en="Start with low intensity and gradually increase the volume and intensity. Increase no more than 10% per week, giving your body enough time to adapt and avoiding overtraining and injury.">从低强度开始，逐步增加运动量和强度。每周增加不超过10%，给身体足够的适应时间，避免过度训练和受伤。</p>
+                </div>
+                <div class="tip-card animate-on-scroll">
+                    <div class="tip-number">02</div>
+                    <h3 data-zh="充分热身与拉伸" data-en="Warm Up & Stretch">充分热身与拉伸</h3>
+                    <p data-zh="运动前进行5-10分钟动态热身，提高体温和肌肉弹性；运动后进行静态拉伸，帮助肌肉恢复，减少酸痛和僵硬感。" data-en="Do 5-10 minutes of dynamic warm-up before exercise to raise body temperature and muscle elasticity; do static stretching after exercise to help muscles recover and reduce soreness and stiffness.">运动前进行5-10分钟动态热身，提高体温和肌肉弹性；运动后进行静态拉伸，帮助肌肉恢复，减少酸痛和僵硬感。</p>
+                </div>
+                <div class="tip-card animate-on-scroll">
+                    <div class="tip-number">03</div>
+                    <h3 data-zh="保持水分与营养" data-en="Stay Hydrated & Nourished">保持水分与营养</h3>
+                    <p data-zh="运动前后及时补充水分，每15-20分钟饮水150-200ml。保证充足的蛋白质、碳水化合物和健康脂肪摄入，为运动提供能量和修复原料。" data-en="Replenish water before and after exercise, drink 150-200ml every 15-20 minutes. Ensure adequate intake of protein, carbohydrates, and healthy fats to provide energy and repair materials for exercise.">运动前后及时补充水分，每15-20分钟饮水150-200ml。保证充足的蛋白质、碳水化合物和健康脂肪摄入，为运动提供能量和修复原料。</p>
+                </div>
+                <div class="tip-card animate-on-scroll">
+                    <div class="tip-number">04</div>
+                    <h3 data-zh="重视休息与恢复" data-en="Rest & Recovery">重视休息与恢复</h3>
+                    <p data-zh="肌肉在休息时生长，而非训练时。保证每晚7-9小时高质量睡眠，同一肌群训练后至少休息48小时，让身体充分修复。" data-en="Muscles grow during rest, not during training. Ensure 7-9 hours of quality sleep each night, and rest the same muscle group for at least 48 hours after training to allow full recovery.">肌肉在休息时生长，而非训练时。保证每晚7-9小时高质量睡眠，同一肌群训练后至少休息48小时，让身体充分修复。</p>
+                </div>
+                <div class="tip-card animate-on-scroll">
+                    <div class="tip-number">05</div>
+                    <h3 data-zh="倾听身体信号" data-en="Listen to Your Body">倾听身体信号</h3>
+                    <p data-zh="学会区分正常的肌肉酸痛和危险的疼痛信号。出现关节痛、头晕、胸闷等不适时立即停止运动，必要时寻求医疗建议。" data-en="Learn to distinguish between normal muscle soreness and dangerous pain signals. Stop exercising immediately if you experience joint pain, dizziness, chest tightness, or other discomfort, and seek medical advice if necessary.">学会区分正常的肌肉酸痛和危险的疼痛信号。出现关节痛、头晕、胸闷等不适时立即停止运动，必要时寻求医疗建议。</p>
+                </div>
+                <div class="tip-card animate-on-scroll">
+                    <div class="tip-number">06</div>
+                    <h3 data-zh="设定目标并记录" data-en="Set Goals & Track Progress">设定目标并记录</h3>
+                    <p data-zh="制定SMART目标（具体、可衡量、可实现、相关、有时限），记录每次运动的数据。看到进步会增强动力，帮助你长期坚持。" data-en="Set SMART goals (Specific, Measurable, Achievable, Relevant, Time-bound) and record data from each workout. Seeing progress boosts motivation and helps you stay consistent long-term.">制定SMART目标（具体、可衡量、可实现、相关、有时限），记录每次运动的数据。看到进步会增强动力，帮助你长期坚持。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Myths Section -->
+    <section class="myths" id="myths">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-zh="常见运动误区" data-en="Common Exercise Myths">常见运动误区</h2>
+                <p data-zh="破除谣言，用科学认知指导你的运动实践" data-en="Debunk myths and guide your exercise practice with scientific knowledge">破除谣言，用科学认知指导你的运动实践</p>
+            </div>
+            <div class="myths-container">
+                <div class="myth-card animate-on-scroll">
+                    <div class="myth-header">
+                        <span class="myth-label myth" data-zh="误区" data-en="Myth">误区</span>
+                        <p data-zh="出汗越多，减肥效果越好" data-en="The more you sweat, the better the weight loss">出汗越多，减肥效果越好</p>
+                    </div>
+                    <div class="myth-body">
+                        <span class="myth-label fact" data-zh="事实" data-en="Fact">事实</span>
+                        <p data-zh="出汗主要是身体调节体温的方式，流失的是水分而非脂肪。减脂的关键在于热量缺口（消耗＞摄入），与出汗量无直接关系。" data-en="Sweating is mainly the body's way of regulating temperature, losing water rather than fat. The key to fat loss is a calorie deficit (burning more than consuming), which is not directly related to the amount of sweat.">出汗主要是身体调节体温的方式，流失的是水分而非脂肪。减脂的关键在于热量缺口（消耗＞摄入），与出汗量无直接关系。</p>
+                    </div>
+                </div>
+                <div class="myth-card animate-on-scroll">
+                    <div class="myth-header">
+                        <span class="myth-label myth" data-zh="误区" data-en="Myth">误区</span>
+                        <p data-zh="局部运动可以局部减脂" data-en="Spot exercises can reduce fat in specific areas">局部运动可以局部减脂</p>
+                    </div>
+                    <div class="myth-body">
+                        <span class="myth-label fact" data-zh="事实" data-en="Fact">事实</span>
+                        <p data-zh="脂肪消耗是全身性的，无法通过某个部位的针对性运动实现局部减脂。但局部力量训练可以塑造肌肉线条，让该部位看起来更紧致。" data-en="Fat loss is systemic; you cannot reduce fat in a specific area through targeted exercises. However, local strength training can shape muscle lines, making that area look more toned.">脂肪消耗是全身性的，无法通过某个部位的针对性运动实现局部减脂。但局部力量训练可以塑造肌肉线条，让该部位看起来更紧致。</p>
+                    </div>
+                </div>
+                <div class="myth-card animate-on-scroll">
+                    <div class="myth-header">
+                        <span class="myth-label myth" data-zh="误区" data-en="Myth">误区</span>
+                        <p data-zh="空腹运动效果更好" data-en="Exercising on an empty stomach is more effective">空腹运动效果更好</p>
+                    </div>
+                    <div class="myth-body">
+                        <span class="myth-label fact" data-zh="事实" data-en="Fact">事实</span>
+                        <p data-zh="空腹运动可能增加脂肪供能比例，但总热量消耗与餐后运动差别不大。如果空腹运动导致头晕乏力，反而影响运动表现和安全性。" data-en="Exercising on an empty stomach may increase the proportion of fat used for energy, but total calorie expenditure is not significantly different from post-meal exercise. If fasting exercise causes dizziness and fatigue, it can反而 affect performance and safety.">空腹运动可能增加脂肪供能比例，但总热量消耗与餐后运动差别不大。如果空腹运动导致头晕乏力，反而影响运动表现和安全性。</p>
+                    </div>
+                </div>
+                <div class="myth-card animate-on-scroll">
+                    <div class="myth-header">
+                        <span class="myth-label myth" data-zh="误区" data-en="Myth">误区</span>
+                        <p data-zh="运动后立刻坐下休息" data-en="Sit down immediately after exercise">运动后立刻坐下休息</p>
+                    </div>
+                    <div class="myth-body">
+                        <span class="myth-label fact" data-zh="事实" data-en="Fact">事实</span>
+                        <p data-zh="剧烈运动后立即坐下或躺下，血液会淤积在下肢，可能导致头晕甚至晕厥。应进行5-10分钟的缓和活动（如慢走），帮助心率平稳下降。" data-en="Sitting or lying down immediately after intense exercise can cause blood to pool in the lower limbs, potentially leading to dizziness or even fainting. Do 5-10 minutes of cool-down activity (like slow walking) to help your heart rate decrease smoothly.">剧烈运动后立即坐下或躺下，血液会淤积在下肢，可能导致头晕甚至晕厥。应进行5-10分钟的缓和活动（如慢走），帮助心率平稳下降。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 data-zh="从今天开始，让运动成为习惯" data-en="Start Today, Make Exercise a Habit">从今天开始，让运动成为习惯</h2>
+            <p data-zh="不需要完美的计划，只需要迈出第一步。每天30分钟，坚持30天，你会感受到身体的积极变化。" data-en="You don't need a perfect plan, just take the first step. 30 minutes a day for 30 days, and you'll feel the positive changes in your body.">不需要完美的计划，只需要迈出第一步。每天30分钟，坚持30天，你会感受到身体的积极变化。</p>
+            <a href="#benefits" class="cta-button" data-zh="开始你的运动之旅" data-en="Start Your Fitness Journey">开始你的运动之旅</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-zh="运动改变生活" data-en="Exercise Changes Life">运动改变生活</h4>
+                    <p data-zh="致力于推广科学运动理念，帮助每个人找到适合自己的运动方式，享受健康活力的生活。" data-en="Dedicated to promoting scientific exercise concepts, helping everyone find the right way to exercise and enjoy a healthy and vibrant life.">致力于推广科学运动理念，帮助每个人找到适合自己的运动方式，享受健康活力的生活。</p>
+                </div>
+                <div class="footer-section">
+                    <h4 data-zh="快速导航" data-en="Quick Links">快速导航</h4>
+                    <a href="#benefits" data-zh="运动益处" data-en="Benefits">运动益处</a>
+                    <a href="#science" data-zh="科学原理" data-en="Science">科学原理</a>
+                    <a href="#types" data-zh="运动类型" data-en="Types">运动类型</a>
+                    <a href="#tips" data-zh="科学建议" data-en="Tips">科学建议</a>
+                </div>
+                <div class="footer-section">
+                    <h4 data-zh="参考资源" data-en="Resources">参考资源</h4>
+                    <a href="#" data-zh="世界卫生组织运动指南" data-en="WHO Exercise Guidelines">世界卫生组织运动指南</a>
+                    <a href="#" data-zh="美国运动医学会" data-en="American College of Sports Medicine">美国运动医学会</a>
+                    <a href="#" data-zh="运动营养学杂志" data-en="Journal of Sports Nutrition">运动营养学杂志</a>
+                </div>
+                <div class="footer-section">
+                    <h4 data-zh="关注我们" data-en="Follow Us">关注我们</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-bilibili"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-zh="© 2024 运动改变生活 | 科学运动，健康生活" data-en="© 2024 Exercise Changes Life | Scientific Exercise, Healthy Living">© 2024 运动改变生活 | 科学运动，健康生活</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language Switching
+        let currentLang = 'en';
+        const langSwitch = document.getElementById('langSwitch');
+
+        function setLanguage(lang) {
+            currentLang = lang;
+
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+
+            document.querySelectorAll('[data-zh][data-en]').forEach((el) => {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            });
+
+            // 按钮显示可切换到的语言
+            langSwitch.textContent = lang === 'en' ? '中文' : 'EN';
+
+            // 同步更新浏览器标签页标题
+            document.title = lang === 'en'
+                ? 'Exercise Changes Life - Scientific Exercise Guide'
+                : '运动改变生活 - 科学运动指南';
+        }
+
+        // 页面载入后默认切换为英文
+        setLanguage('en');
+
+        langSwitch.addEventListener('click', () => {
+            setLanguage(currentLang === 'en' ? 'zh' : 'en');
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Scroll Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar Background on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.style.background = 'white';
+                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
+            }
+        });
+
+        // Counter Animation for Stats
+        function animateCounter(element, target, suffix = '') {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current) + suffix;
+            }, 30);
+        }
+
+        // Trigger counter animation when hero section is visible
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = document.querySelectorAll('.stat-number');
+                    animateCounter(statNumbers[0], 150, '');
+                    animateCounter(statNumbers[1], 30, '%');
+                    animateCounter(statNumbers[2], 7, '+');
+                    heroObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        heroObserver.observe(document.querySelector('.hero-stats'));
+    </script>
+</body>
+</html>
