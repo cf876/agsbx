@@ -21,8 +21,8 @@ RUN apk add --no-cache \
 
 WORKDIR /app
 
-COPY nodejs/index.js nodejs/index.html nodejs/package.json ./
-COPY nodejs/*.sh ./
+COPY index.js index.html package.json ./
+COPY *.sh ./
 
 RUN npm install --omit=dev \
     && chmod 755 /app/*.sh \
